@@ -2,15 +2,16 @@
   <div id="app">
     <h2>
       <span>Pomodoro</span>
-      <controls-component :state="state" @click="onClick"></controls-component>
+      <controls-component
+       :state="state" v-on="{start, pause, stop}"></controls-component>
     </h2>
-    <div>
-    </div>
+      <timer-component v-bind="{minutes, seconds}"></timer-component>
   </div>
 </template>
 
 <script>
   import ControlsComponent from "./components/ControlsComponent";
+  import TimerComponent from "./components/TimerComponent";
 
   const [ WORKING_MINUTES, RESTING_MINUTES ] = [ 2, 2 ];
   const TICK_STATE = { 
@@ -21,7 +22,8 @@
 
   export default {
     components:{
-      ControlsComponent
+      ControlsComponent,
+      TimerComponent
     },
     data () {
       return  {
@@ -35,12 +37,6 @@
       title: function(){
         return this.working ? "Working" : "On break";
       },
-      paddedMinutes: function(){
-        return this.minutes < 10 ? "0" + this.minutes: this.minutes;
-      },
-      paddedSeconds: function(){
-        return this.seconds < 10 ? "0" + this.seconds: this.seconds;
-      }
     },
     methods: {
       onClick: function(buttonType){

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{ state }}</p>
     <button :disabled="state==='on'" @click="start">Start</button>
     <button :disabled="state!=='on'" @click="pause">Pause</button>
     <button :disabled="state==='off'" @click="stop">Stop/Reset</button>
@@ -12,13 +11,13 @@ export default {
   props: ["state"],
   methods: {
     start() {
-      this.$emit('click',"start")
+      this.$emit('start')
     },
     pause() {
-      this.$emit('click',"pause")
+      this.$emit('pause')
     },
     stop() {
-      this.$emit('click',"stop")
+      this.$emit('stop')
     }
   }
 
